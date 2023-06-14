@@ -1,14 +1,12 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <v-btn class="mx-2" fab dark small color="primary">
-      <v-icon dark> mdi-minus </v-icon>
-    </v-btn>
-  </div>
+  <v-card class="mx-auto pa-10" max-width="900" width="100%" flat>
+    <search-bar class="mb-10" />
+  </v-card>
 </template>
 
 <script>
+import SearchBar from "@/components/SearchBar.vue";
 export default {
-  name: "HomeView",
+  components: { SearchBar },
 };
 </script>
