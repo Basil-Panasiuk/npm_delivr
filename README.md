@@ -1,24 +1,11 @@
 # npm_delivr
 
-## Project setup
-```
-npm install
-```
+- [DEMO LINK](https://basil-panasiuk.github.io/npm_delivr/)
 
-### Compiles and hot-reloads for development
+## Run locally
 ```
+npm i
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Search API
+For searching npm packages was used [the official npm API](https://github.com/npm/registry/blob/master/docs/REGISTRY-API.md#get-v1search)
