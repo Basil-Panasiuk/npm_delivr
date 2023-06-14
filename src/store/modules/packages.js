@@ -8,9 +8,13 @@ const state = {
   perPage: PER_PAGE,
   searchValue: "",
   page: 1,
+  selectedPackage: null,
 };
 
 const mutations = {
+  selectPackage(state, payload) {
+    state.selectedPackage = payload;
+  },
   setPage(state, payload) {
     state.page = payload;
   },

@@ -18,10 +18,14 @@
       </template>
       <template v-slot:body="{ items }" v-else>
         <tbody>
-          <tr v-for="item in items" :key="item.name">
+          <tr
+            v-for="item in items"
+            :key="item.name"
+            @click="() => onRowClick(item)"
+          >
             <td>{{ item.name }}</td>
             <td>{{ item.version }}</td>
-            <td>{{ item.author?.name || "dwdw" }}</td>
+            <td>{{ item.author?.name }}</td>
           </tr>
         </tbody>
       </template>
@@ -37,14 +41,17 @@
         ></v-pagination>
       </v-card>
     </div>
+    <package-info v-model="isDetailInfo" />
   </div>
 </template>
 <script>
 import { mapGetters, mapState } from "vuex";
-
+import PackageInfo from "@/components/PackageInfo.vue";
 export default {
+  components: { PackageInfo },
   data() {
     return {
+      isDetailInfo: false,
       headers: [
         { text: "Name", sortable: false },
         { text: "Version", sortable: false },
@@ -56,6 +63,10 @@ export default {
   methods: {
     onPageChange(value) {
       this.$store.commit("setPage", value);
+    },
+    onRowClick(pack) {
+      this.$store.commit("selectPackage", pack);
+      this.isDetailInfo = true;
     },
   },
 

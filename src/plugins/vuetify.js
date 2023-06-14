@@ -17,7 +17,10 @@ export const vuetify = new Vuetify({
           base: "#f87443",
         },
         gray: {
+          lighten1: "#edf0f2",
           base: "#909AB0",
+          darken1: "#737B8B",
+          darken2: "#4f4746",
         },
       },
     },

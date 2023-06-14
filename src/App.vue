@@ -19,4 +19,8 @@ export default {};
 .v-data-table td {
   max-width: 200px;
 }
+
+.f-12 {
+  font-size: 12px;
+}
 </style>
