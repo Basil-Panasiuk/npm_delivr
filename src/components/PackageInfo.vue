@@ -1,6 +1,6 @@
 <template>
   <v-dialog max-width="620" v-model="isShowed">
-    <v-card flat class="px-10 py-8 radius-16 relative" v-if="selectedPackage">
+    <v-card flat class="px-10 py-8" v-if="selectedPackage">
       <div class="d-flex justify-space-between mb-4">
         <div class="d-flex align-center flex-wrap">
           <h2 class="font-weight-black me-3">
@@ -16,7 +16,7 @@
           </v-card>
         </div>
 
-        <v-btn icon @click="isShowed = false" class="close-btn">
+        <v-btn icon @click="isShowed = false">
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </div>
@@ -36,7 +36,7 @@
       <div class="d-flex flex-wrap align-center">
         <v-card
           v-for="word in selectedPackage.keywords"
-          :key="word"
+          :key="uniqueId()"
           flat
           class="py-1 px-3 gray--text text--darken-2 f-12 me-2 mb-2"
           width="max-content"
@@ -50,7 +50,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
-
+import createUID from "create-unique-id";
 export default {
   props: {
     value: {
@@ -58,8 +58,11 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {};
+
+  methods: {
+    uniqueId() {
+      return createUID(22);
+    },
   },
 
   computed: {

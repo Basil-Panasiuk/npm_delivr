@@ -6,6 +6,7 @@
       :items="packagesList"
       :items-per-page="perPage"
       :loading="isLoading"
+      :mobile-breakpoint="0"
     >
       <template v-slot:loading>
         <div>loading...</div>
@@ -22,6 +23,7 @@
             v-for="item in items"
             :key="item.name"
             @click="() => onRowClick(item)"
+            class="pointer"
           >
             <td>{{ item.name }}</td>
             <td>{{ item.version }}</td>

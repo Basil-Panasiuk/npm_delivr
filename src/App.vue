@@ -23,4 +23,8 @@ export default {};
 .f-12 {
   font-size: 12px;
 }
+
+.pointer {
+  cursor: pointer;
+}
 </style>
