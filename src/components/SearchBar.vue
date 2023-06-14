@@ -5,7 +5,7 @@
       placeholder="Search all of npm"
       prepend-inner-icon="mdi-magnify"
       hide-details
-      v-model="searchValue"
+      :value="searchValue"
       @input="handleSearchValue"
     ></v-text-field>
   </div>
@@ -13,35 +13,48 @@
 <script>
 import queryString from "query-string";
 import { debounce } from "vue-debounce";
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
+import { DELAY } from "@/helpers/debounce";
 
 export default {
-  data() {
-    return {
-      searchValue: "",
-    };
-  },
-
   methods: {
-    loadPackages() {
-      this.$store.dispatch("getPackages", this.getRequestsParams());
+    loadPackages(from = 0) {
+      this.$store.dispatch("getPackages", this.getRequestParams(from));
     },
-    getRequestsParams() {
+    getRequestParams(from) {
       return queryString.stringify({
         text: this.searchValue,
         size: this.perPage,
+        from,
       });
     },
 
-    handleSearchValue: debounce(function () {
-      this.loadPackages();
-    }, 1000),
+    handleSearchValue: debounce(function (value) {
+      this.$store.commit("setSearchValue", value);
+
+      if (this.page > 1) {
+        this.$store.commit("setPage", 1);
+      } else {
+        this.loadPackages();
+      }
+    }, DELAY),
   },
 
   computed: {
     ...mapState({
       perPage: (state) => state.packages.perPage,
+      searchValue: (state) => state.packages.searchValue,
+      page: (state) => state.packages.page,
     }),
+    ...mapGetters({
+      startFromIndex: "startFromIndex",
+    }),
+  },
+
+  watch: {
+    page() {
+      this.loadPackages(this.startFromIndex);
+    },
   },
 };
 </script>

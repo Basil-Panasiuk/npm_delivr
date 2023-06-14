@@ -8,10 +8,16 @@ Vue.use(Vuetify);
 export const vuetify = new Vuetify({
   rtl: false,
   theme: {
+    options: {
+      customProperties: true,
+    },
     themes: {
       light: {
         primary: {
-          base: "#6C3CEA",
+          base: "#f87443",
+        },
+        gray: {
+          base: "#909AB0",
         },
       },
     },
